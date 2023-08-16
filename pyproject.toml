@@ -18,3 +18,11 @@ select = ["E", "W", "F", "UP", "C", "T", "PYI", "PT", "Q"]
 ignore = ["E402", "C901"]
 line-length = 120
 target-version = "py310"
+
+[project.urls]
+Homepage = "https://github.com/KomoriDev/kirami-plugin-beauty-rate"
+Repository = "https://github.com/KomoriDev/kirami-plugin-beauty-rate"
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
