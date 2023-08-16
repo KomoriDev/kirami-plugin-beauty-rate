@@ -89,3 +89,7 @@ plugins = ["kirami_plugin_beauty_rate"]
 ### 效果图
 
 ~~理论上，这里应该有些图片~~
+
+## ❤️ 鸣谢
+感谢以下 开发者 和 Github项目 对 本项目 作出的贡献：（排名不分先后）
+* [`zhulinyv/NJS`](https://github.com/zhulinyv/NJS)：基于 NoneBot 的 QQ 机器人（本项目直接参考）
