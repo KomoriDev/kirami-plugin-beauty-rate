@@ -1,0 +1,6 @@
+[plugin]
+name = '颜值评分'
+summary = '让bot为你的颜值打分！ '
+version = '0.1.0'
+author = 'Komorebi'
+usage = '发送 "颜值评分 [图片]"'
