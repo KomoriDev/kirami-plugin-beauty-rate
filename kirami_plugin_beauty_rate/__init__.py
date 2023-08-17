@@ -2,8 +2,8 @@ import base64
 from io import BytesIO
 
 from nonebot import require
-from nonebot.typing import T_State
 
+from kirami.state import State
 from kirami.utils.request import Request
 from kirami.typing import MessageEvent, MessageSegment
 
@@ -16,8 +16,8 @@ from nonebot_plugin_alconna import Match, on_alconna, AlconnaArg, AlconnaMatch
 from nonebot_plugin_alconna.matcher import AlconnaMatcher
 from nonebot_plugin_alconna.adapters import Image
 
-from .config import API_KEY, SECRET_KEY
 from .utils import FaceRecognition
+from .config import API_KEY, SECRET_KEY
 
 
 face_val = on_alconna(
@@ -45,7 +45,7 @@ async def get_pic(
 
 
 @face_val.got_path("img", prompt="请发送照片")
-async def get_avatar_img(state: T_State, image: Image = AlconnaArg("img")):
+async def get_avatar_img(state: State, image: Image = AlconnaArg("img")):
     if image.url:
         state["img"] = image.url
     else:
@@ -53,7 +53,7 @@ async def get_avatar_img(state: T_State, image: Image = AlconnaArg("img")):
 
 
 @face_val.handle()
-async def score(event: MessageEvent, state: T_State):
+async def score(state: State, event: MessageEvent):
     img_url = state.get("img")
     if img_url is None:
         await face_val.finish("没有找到图片！", at_sender=True)
