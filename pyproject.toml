@@ -1,6 +1,6 @@
 [project]
 name = "kirami-plugin-beauty-rate"
-version = "0.1.0"
+version = "0.1.1"
 description = "基于 KiramiBot 的颜值评分插件"
 authors = [
     {name = "Komorebi", email = "mute231010@gmail.com"},
