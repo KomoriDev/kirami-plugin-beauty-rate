@@ -1,13 +1,13 @@
 [project]
 name = "kirami-plugin-beauty-rate"
-version = "0.1.1"
+version = "0.1.2"
 description = "基于 KiramiBot 的颜值评分插件"
 authors = [
     {name = "Komorebi", email = "mute231010@gmail.com"},
 ]
 dependencies = [
-    "KiramiBot>=0.0.0",
-    "nonebot-plugin-alconna>=0.16.0",
+    "kiramibot>=0.3.2",
+    "nonebot-plugin-alconna>=0.25.1",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
