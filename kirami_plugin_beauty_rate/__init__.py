@@ -12,12 +12,14 @@ from arclet.alconna.args import Args
 from arclet.alconna.core import Alconna
 from arclet.alconna.typing import CommandMeta
 
-from nonebot_plugin_alconna import Match, on_alconna, AlconnaArg, AlconnaMatch
+from nonebot_plugin_alconna import Image
 from nonebot_plugin_alconna.matcher import AlconnaMatcher
-from nonebot_plugin_alconna.adapters import Image
+from nonebot_plugin_alconna import Match, on_alconna, AlconnaArg, AlconnaMatch
 
 from .utils import FaceRecognition
-from .config import API_KEY, SECRET_KEY
+from .config import Config
+
+config = Config.load_config("beauty_rate")
 
 
 face_val = on_alconna(
@@ -29,17 +31,16 @@ face_val = on_alconna(
             usage="颜值评分 [图片]",
             example="颜值评分 [图片]",
             author="Komorebi",
-            compact=True
-        )
+            compact=True,
+        ),
     ),
-    aliases={"颜值打分"}
+    aliases={"颜值打分"},
+    use_cmd_start=True,
 )
 
 
 @face_val.handle()
-async def get_pic(
-    matcher: AlconnaMatcher, image: Match[Image] = AlconnaMatch("img")
-):
+async def get_pic(matcher: AlconnaMatcher, image: Match[Image] = AlconnaMatch("img")):
     if image.available:
         matcher.set_path_arg("img", image.result)
 
@@ -61,7 +62,7 @@ async def score(state: State, event: MessageEvent):
 
     img_b64_str = base64.b64encode(res.content).decode()
 
-    faces = FaceRecognition(img_b64_str, API_KEY, SECRET_KEY)
+    faces = FaceRecognition(img_b64_str, config.api_key, config.secret_key)
     result = await faces.face_beauty()
 
     if result["error_msg"] == "pic not has face":
@@ -85,10 +86,12 @@ async def score(state: State, event: MessageEvent):
     buf = BytesIO()
     await faces.draw_face_rects(pic_bytes_stream, buf, faces_pos)
 
-    msg = "\n".join([f"Face{i + 1}:\n"
-                    f"性别: {gender}\n"
-                    f"颜值评分: {beauty}/100"
-                    for i, (gender, beauty) in enumerate(zip(faces_gender, faces_beauty))])
+    msg = "\n".join(
+        [
+            f"Face{i + 1}:\n" f"性别: {gender}\n" f"颜值评分: {beauty}/100"
+            for i, (gender, beauty) in enumerate(zip(faces_gender, faces_beauty))
+        ]
+    )
     await face_val.send(MessageSegment.reply(event.message_id) + msg, at_sender=True)
 
     pic_bytes_stream.close()

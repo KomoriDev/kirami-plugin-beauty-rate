@@ -68,7 +68,7 @@ plugins = ["kirami_plugin_beauty_rate"]
 
 ## ⚙️ 配置
 
-在 KiramiBot 项目的 `.env` 文件中添加下表中的必填配置
+打开 KiramiBot 项目的配置文件，在 `[beauty_rate]` 部分添加下表中的必填配置
 
 > `api_key` 和 `secret_key` 可以从 [这里](https://cloud.baidu.com/product/face) 获取
 
@@ -76,7 +76,6 @@ plugins = ["kirami_plugin_beauty_rate"]
 |:-----:|:----:|:----:|:----:|
 | api_key | 是 | 无 | 无 |
 | secret_key | 是 | 无 | 无 |
-| ALCONNA_USE_COMMAND_START | 否 | false | [详见](https://github.com/nonebot/plugin-alconna/tree/master#%E9%85%8D%E7%BD%AE)
 
 ## 🎉 使用
 
@@ -91,5 +90,7 @@ plugins = ["kirami_plugin_beauty_rate"]
 ~~理论上，这里应该有些图片~~
 
 ## ❤️ 鸣谢
+
 感谢以下 开发者 和 Github项目 对 本项目 作出的贡献：（排名不分先后）
+
 * [`zhulinyv/NJS`](https://github.com/zhulinyv/NJS)：基于 NoneBot 的 QQ 机器人（本项目直接参考）
