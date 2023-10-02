@@ -8,11 +8,11 @@ font_path = FONT_DIR / "SIMYOU.TTF"
 
 
 def ra_sin(angle):
-    return round(sin(angle * pi/180), 2)
+    return round(sin(angle * pi / 180), 2)
 
 
 def ra_cos(angle):
-    return round(cos(angle * pi/180), 2)
+    return round(cos(angle * pi / 180), 2)
 
 
 def rotate_line(center, p0, angle):
@@ -28,10 +28,11 @@ class FaceRecognition:
         self.API_KEY = ak
         self.SECRET_KEY = sk
         self.img_b64_str = img_b64_str
-        self.headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                                    "AppleWebKit/537.36 (KHTML, like Gecko) "
-                                    "Chrome/54.0.2840.99 Safari/537.36"
-                        }
+        self.headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/54.0.2840.99 Safari/537.36"
+        }
 
     async def get_access_token(self) -> str:
         host = f"https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id={self.API_KEY}&client_secret={self.SECRET_KEY}"
@@ -46,7 +47,7 @@ class FaceRecognition:
             "image": self.img_b64_str,
             "image_type": "BASE64",
             "face_field": "gender,beauty",
-            "max_face_num": 120
+            "max_face_num": 120,
         }
         access_token = await self.get_access_token()
         request_url = f"{api_url}?access_token={access_token}"
@@ -73,7 +74,9 @@ class FaceRecognition:
             lower_left = rotate_line(upper_left, (left, top + height), angle)
             lower_right = rotate_line(upper_left, (left + width, top + height), angle)
 
-            img_draw.polygon([upper_left, lower_left, lower_right, upper_right], outline=(0, 0, 255))
+            img_draw.polygon(
+                [upper_left, lower_left, lower_right, upper_right], outline=(0, 0, 255)
+            )
             img_draw.text(upper_left, str(index), fill=(0, 0, 255), font=font)
 
             index += 1
